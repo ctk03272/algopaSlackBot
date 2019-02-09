@@ -12,8 +12,8 @@ rtm.start();
 const web = new WebClient(token);
 
 let list = [];
-// let users = ['ctk0327', 'oyrin9595', 'ooiidd', 'klee', 'dragon4499', 'drcobi', 'fluxus', 'morot2'];
-let users = ['klee'];
+let users = ['ctk0327', 'oyrin9595', 'ooiidd', 'klee', 'dragon4499', 'drcobi', 'fluxus', 'morot2'];
+// let users = ['klee'];
 let scores = [0, 0, 0, 0, 0, 0, 0, 0];
 let solved = {
     'ctk0327': [],
@@ -33,7 +33,7 @@ let solved = {
 web.channels.list()
     .then((res) => {
         // Take any channel for which the bot is a member
-        const channel = res.channels.find(c => c.is_member && c.name === 'test');
+        const channel = res.channels.find(c => c.is_member && c.name === 'general');
 
         if (channel) {
             rtm.on('message', (message) => {
@@ -99,7 +99,7 @@ web.channels.list()
                 }
 
                 if (message.text.slice(0, 6) === "이번주 문제") {
-                    const prob = message.text.slice(7);
+                    const prob = message.text.slice(8);
                     makeProblem(prob).then(function () {
                         rtm.sendMessage("이번주 해당 문제는 " + list.toString() + " 입니다.", channel.id)
                             .then((res) => {
@@ -168,7 +168,7 @@ const getThisWeekSolved = function (user) {
                 const data = $(this);
                 console.log(data.text().toString());
                 list.forEach((a) => {
-                    if (a.toString() === data.text().toString()) {
+                    if (Number(a)=== Number(data.text())) {
                         tried.push(a);
                     }
                 });
