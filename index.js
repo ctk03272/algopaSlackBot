@@ -12,7 +12,8 @@ rtm.start();
 const web = new WebClient(token);
 
 let list = [];
-let users = ['ctk0327', 'oyrin9595', 'ooiidd', 'klee', 'dragon4499', 'drcobi', 'fluxus', 'morot2'];
+// let users = ['ctk0327', 'oyrin9595', 'ooiidd', 'klee', 'dragon4499', 'drcobi', 'fluxus', 'morot2'];
+let users = ['klee'];
 let scores = [0, 0, 0, 0, 0, 0, 0, 0];
 let solved = {
     'ctk0327': [],
@@ -32,7 +33,7 @@ let solved = {
 web.channels.list()
     .then((res) => {
         // Take any channel for which the bot is a member
-        const channel = res.channels.find(c => c.is_member && c.name === 'general');
+        const channel = res.channels.find(c => c.is_member && c.name === 'test');
 
         if (channel) {
             rtm.on('message', (message) => {
@@ -165,6 +166,7 @@ const getThisWeekSolved = function (user) {
             const $ = cheerio.load(html);
             $('.panel-body .problem_number a').each(function () {
                 const data = $(this);
+                console.log(data.text().toString());
                 list.forEach((a) => {
                     if (a.toString() === data.text().toString()) {
                         tried.push(a);
