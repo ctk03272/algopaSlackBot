@@ -32,7 +32,7 @@ let solved = {
 web.channels.list()
     .then((res) => {
         // Take any channel for which the bot is a member
-        const channel = res.channels.find(c => c.is_member && c.name === 'test');
+        const channel = res.channels.find(c => c.is_member && c.name === 'general');
 
         if (channel) {
             rtm.on('message', (message) => {
@@ -100,7 +100,7 @@ web.channels.list()
                 if (message.text.slice(0, 6) === "이번주 문제") {
                     const prob = message.text.slice(7);
                     makeProblem(prob).then(function () {
-                        rtm.sendMessage("이번주 문제는 " + list.toString() + " 입니다.", channel.id)
+                        rtm.sendMessage("이번주 해당 문제는 " + list.toString() + " 입니다.", channel.id)
                             .then((res) => {
                                 console.log('Message sent: ', res.ts);
                             })
