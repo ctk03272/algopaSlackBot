@@ -13,7 +13,7 @@ const web = new WebClient(token);
 
 let list = [];
 let need;
-let users = ['ctk0327', 'oyrin9595', 'ooiidd', 'klee', 'dragon4499', 'drcobi', 'fluxus', 'morot2'];
+let users = ['ctk0327', 'oyrin9595', 'ooiidd', 'klee', 'dragon4499', 'drcobi', 'fluxus', 'morot2','ggrn'];
 // let users = ['klee'];
 let scores = [0, 0, 0, 0, 0, 0, 0, 0];
 let solved = {
@@ -24,7 +24,8 @@ let solved = {
     'dragon4499': [],
     'drcobi': [],
     'fluxus': [],
-    'morot2': []
+    'morot2': [],
+    'ggrn':[]
 };
 
 // let users = ['ctk0327']
@@ -78,7 +79,7 @@ web.channels.list()
                     }
 
                     if (message.text.slice(0, 6) === "@세팅 방법") {
-                        rtm.sendMessage("ctk0327, oyrin9595, ooiidd, klee, dragon4499, drcobi, fluxus, morot2의 순서로 입력해 주세요", channel.id)
+                        rtm.sendMessage("ctk0327, oyrin9595, ooiidd, klee, dragon4499, drcobi, fluxus, morot2, ggrn의 순서로 입력해 주세요", channel.id)
                             .then((res) => {
                                 console.log('Message sent: ', res.ts);
                             })
@@ -105,7 +106,8 @@ web.channels.list()
                             'dragon4499': [],
                             'drcobi': [],
                             'fluxus': [],
-                            'morot2': []
+                            'morot2': [],
+                            'ggrn'  : []
                         };
                         rtm.sendMessage("점수가 초기화 되었습니다.", channel.id)
                             .then((res) => {
@@ -124,7 +126,8 @@ web.channels.list()
                             'dragon4499': [],
                             'drcobi': [],
                             'fluxus': [],
-                            'morot2': []
+                            'morot2': [],
+                            'ggrn'  : []
                         };
                         rtm.sendMessage("점수가 세팅 되었습니다.", channel.id)
                             .then((res) => {
