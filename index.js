@@ -15,7 +15,7 @@ let list = [];
 let need;
 let users = ['ctk0327', 'oyrin9595', 'ooiidd', 'klee', 'dragon4499', 'drcobi', 'fluxus', 'morot2','ggrn'];
 // let users = ['klee'];
-let scores = [0, 0, 0, 0, 0, 0, 0, 0];
+let scores = [0, 0, 0, 0, 0, 0, 0, 0,0];
 let solved = {
     'ctk0327': [],
     'oyrin9595': [],
@@ -97,7 +97,7 @@ web.channels.list()
                     }
 
                     if (message.text === "@점수 초기화") {
-                        scores = [I, 0, 0, 0, 0, 0, 0, 0];
+                        scores = [0, 0, 0, 0, 0, 0, 0, 0,0];
                         solved = {
                             'ctk0327': [],
                             'oyrin9595': [],
@@ -117,7 +117,7 @@ web.channels.list()
                     }
 
                     if (message.text.slice(0, 6) === "@점수 세팅") {
-                        scores = [Number(message.charAt(6)),Number(message.charAt(7)),Number(message.charAt(8)),Number(message.charAt(9)),Number(message.charAt(10)),Number(message.charAt(11)),Number(message.charAt(12)),Number(message.charAt(13))];
+                        scores = [Number(message.text.charAt(6)),Number(message.text.charAt(7)),Number(message.text.charAt(8)),Number(message.text.charAt(9)),Number(message.text.charAt(10)),Number(message.text.charAt(11)),Number(message.text.charAt(12)),Number(message.text.charAt(13)),Number(message.text.charAt(14))];
                         solved = {
                             'ctk0327': [],
                             'oyrin9595': [],
