@@ -46,6 +46,7 @@ web.channels.list()
                         .then((res) => {
                             console.log('Message sent: ', res.ts);
                         })
+                        .catch(console.error);
                 }else{
                     if (message.text === "@안내") {
                         let info = "안녕하세요 알고파 봇입니다.\n" +
