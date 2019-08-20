@@ -3,7 +3,7 @@ const request = require('request-promise');
 const cheerio = require('cheerio');
 
 /*const token = 'xoxb-522407326455-543259727331-CQSmXphLjIxmwTCocAY495IC';*/
-const token = 'xoxb-522407326455-543259727331-o0KF6z3Lgal7SA8YD8zDtE8K';
+const token = process.env.SLACK_TOKEN;
 
 
 // The client is initialized and then started to get an active connection to the platform
@@ -38,17 +38,17 @@ web.channels.list()
     .then((res) => {
         // Take any channel for which the bot is a member
         const channel = res.channels.find(c => c.is_member && (c.name === 'test' || c.name === 'general'));
-        channel.id="CFBAE8EQ2"; //general 채널 ID
-        //channel.id="CFYP0Q3NV" //test 채널 ID
+        //channel.id="CFBAE8EQ2"; //general 채널 ID
+        channel.id="CFYP0Q3NV" //test 채널 ID
         if (channel) {
             rtm.on('message', (message) => {
 
-                if(message==undefined || message==""){
-                    rtm.sendMessage("에러가 발생하였습니다.", channel.id)
-                        .then((res) => {
-                            console.log('Message sent: ', res.ts);
-                        })
-                        .catch(console.error);
+                if(message==undefined || message==""||message.text==undefined ){
+                  //  rtm.sendMessage("에러가 발생하였습니다.", channel.id)
+                    //    .then((res) => {
+                      //      console.log('Message sent: ', res.ts);
+                       // })
+                      //  .catch(console.error);
                 }else{
                     if (message.text === "@안내") {
                         let info = "안녕하세요 알고파 봇입니다.\n" +
