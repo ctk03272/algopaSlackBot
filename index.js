@@ -3,7 +3,6 @@ const request = require('request-promise');
 const cheerio = require('cheerio');
 
 
-/*const token = 'xoxb-522407326455-543259727331-CQSmXphLjIxmwTCocAY495IC';*/
 const token = process.env.SLACK_TOKEN;
 
 
