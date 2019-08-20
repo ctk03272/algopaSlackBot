@@ -2,8 +2,10 @@ const {RTMClient, WebClient} = require('@slack/client');
 const request = require('request-promise');
 const cheerio = require('cheerio');
 
+
 /*const token = 'xoxb-522407326455-543259727331-CQSmXphLjIxmwTCocAY495IC';*/
 const token = process.env.SLACK_TOKEN;
+
 
 
 // The client is initialized and then started to get an active connection to the platform
