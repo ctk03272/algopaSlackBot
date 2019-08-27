@@ -5,7 +5,8 @@ const cheerio = require('cheerio');
 
 const token = process.env.SLACK_TOKEN;
 
-
+const { appendFile } = require('fs');
+const NO_MSG = { text: "** no message **" };
 
 // The client is initialized and then started to get an active connection to the platform
 const rtm = new RTMClient(token);
@@ -38,13 +39,16 @@ let solved = {
 web.channels.list()
     .then((res) => {
         // Take any channel for which the bot is a member
-        const channel = res.channels.find(c => c.is_member && (c.name === 'test' || c.name === 'general'));
+        const channel = res.channels.find(c => c.is_member && (c.name === 'test' || c.name === 'general' || c.name === 'algopa_bot_dev_test'));
         //channel.id="CFBAE8EQ2"; //general 채널 ID
-        channel.id="CFYP0Q3NV" //test 채널 ID
+        //channel.id="CFYP0Q3NV" //test 채널 ID
+        channel.id = "CME0Y2058"; // algopa bot test channel id 
         if (channel) {
             rtm.on('message', (message) => {
+                appendFile("./message.log", 
+                    (message ? message.text : "no message.") + '\n', (err) => !err || console.error(err));
 
-                if(message==undefined || message==""||message.text==undefined ){
+                if(message == undefined || message == "" || message.text==undefined ){
                   //  rtm.sendMessage("에러가 발생하였습니다.", channel.id)
                     //    .then((res) => {
                       //      console.log('Message sent: ', res.ts);
