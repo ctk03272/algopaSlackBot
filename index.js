@@ -191,20 +191,22 @@ web.channels.list()
 
 
                     if (message.text === "@이번주 풀이") {
-                        users.forEach(a => {
-                            getThisWeekSolved(a).then(function (tried) {
-                                let message;
-                                if (tried.length !== 0) {
-                                    message = a + ' 의 이번주 풀이 문제는 ' + tried.toString() + ' 입니다.';
+                        Promise.all(users.map(getThisWeekSolved)).then((tries) => {
+                            const message = tries.reduce((message, tried, i) => {
+                                if(tried && tried.length != 0 ) {
+                                    message += `${users[i]} 의 이번주 풀이 문제는 ${tried.toString()} 입니다.\n`
                                 } else {
-                                    message = a + ' 의 이번주 풀이 문제는 없습니다 벌금내세요.'
+                                    message += `${users[i]} 의 이번주 풀이 문제는 없습니다. 벌금내세요.\n`
                                 }
-                                rtm.sendMessage(message, channel.id)
-                                    .then((res) => {
-                                        console.log('Message sent: ', res.ts);
-                                    })
-                                    .catch(console.error);
-                            });
+
+                                return message;
+                            }, '');
+
+                            rtm.sendMessage(message, channel.id)
+                                .then((res) => {
+                                    console.log('Message sent: ', res.ts);
+                                })
+                                .catch(console.error);
                         });
                     }
                     console.log(`(channel:${message.channel}) ${message.user} says: ${message.text}`);
@@ -257,8 +259,10 @@ const makeNeedProblem = function (prob) {
 const getThisWeekSolved = function (user) {
     return new Promise(function (resolve, reject) {
         const url = 'https://www.acmicpc.net/user/';
-        let tried = [];
+        
         request(url + user).then(function (html) {
+            let tried = [];
+
             const $ = cheerio.load(html);
             $('.panel-body .problem_number a').each(function () {
                 const data = $(this);
@@ -269,7 +273,9 @@ const getThisWeekSolved = function (user) {
                     }
                 });
             });
-        }).then(function () {
+
+            return tried;
+        }).then(function (tried) {
             console.log(tried);
             resolve(tried);
         }).catch(function () {
